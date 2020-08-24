@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" layout:decorate="master_consultor">
+<body>
+	<main layout:fragment="contenido">
+	<div class="card">
+		<h4
+			class="card-header text-center font-weight-bold text-uppercase py-4">Lista
+			de consultorias para revisar evidencia enviada por el cliente</h4>
+		<div class="card-body">
+			<div id="table" class="table-editable">
+				<span class="table-add float-right mb-3 mr-2"><a href="#"
+					class="text-success"><i class="fas fa-plus fa-2x"
+						aria-hidden="true"></i></a></span>
+				<table
+					class="table table-bordered table-responsive-sm table-striped table-sm text-center">
+					<thead>
+						<tr>
+							<th class="text-center">Id Consultoria</th>
+							<th class="text-center">Estado Consultoria</th>
+							<th class="text-center">Nombre Empresa</th>
+							<th class="text-center">Nombre Back-Office</th>
+							<th class="text-center">Nombre Consultor</th>
+							<th class="text-center">Tipo Consultoria</th>
+							<th class="text-center">Accion</th>
+							<th class="text-center">Deahabilitar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="consultoria : ${consultorias}">
+							<td class="pt-3-half"
+								th:text="${consultoria.datoComunId.solicitudConsultoriaId.SolicitudConsultoriaId}"></td>
+							<td class="badge badge-danger"
+								th:text="${consultoria.datoComunId.solicitudConsultoriaId.estadoConsultoriaId.estadoConsultoria}"></td>
+							<td class="pt-3-half"
+								th:text="${consultoria.clienteId.nombreEmpresa}"></td>
+							<td class="pt-3-half"
+								th:text="${consultoria.backOfficeId?.userId?.nombre}"></td>
+							<td class="pt-3-half"
+								th:text="${consultoria.consultorId?.userId?.nombre}"></td>
+							<td class="pt-3-half"
+								th:text="${consultoria.datoComunId.solicitudConsultoriaId.tipoConsultoriaId.tipoConsultoria}"></td>
+							<td><a
+								th:href="@{/consultor/formulario_consultoria/(consultorId=${usuarioCons.consultorId},informeId=${consultoria.informeId})}"
+								class="btn btn-info">Revisar</a></td>
+							<td><span class="table-remove"><button type="button"
+										class="btn btn-warning btn-rounded btn-sm my-0" disabled>Deahabilitar</button></span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	</main>
+</body>
+</html>

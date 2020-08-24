@@ -1,0 +1,70 @@
+
+<div th:fragment="sidebar-admin" class="container-fluid">
+	<div class="row">
+		<nav id="sidebarMenu"
+			class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+			<div class="sidebar-sticky pt-3">
+				<ul class="nav flex-column">
+					<li class="nav-item"><a class="nav-link active" href="#"><i
+							class="fas fa-tachometer-alt"></i> Dashboard <span
+							class="sr-only">(current)</span> </a></li>
+					<li class="nav-item"><a class="nav-link" href="#"> <i
+							class="fas fa-cart-plus"></i> Solicitudes
+					</a></li>
+					<li class="nav-item"><a class="nav-link" href="#"> <i
+							class="fas fa-layer-group"></i> Consultorias
+					</a></li>
+				</ul>
+
+				<h6
+					class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+					<span>Gestion</span> <a
+						class="d-flex align-items-center text-muted" href="#"
+						aria-label="Add a new report"> <span
+						data-feather="plus-circle"></span>
+					</a>
+				</h6>
+
+				<ul class="nav flex-column">
+					<!-- Nomina -->
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="pagesDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> <i class="far fa-folder"></i> <span>Nomina</span>
+					</a>
+						<div class="dropdown-menu" aria-labelledby="pagesDropdown">
+							<a class="dropdown-item tAdmin"
+								th:href="@{tableAdmin/(username=${username})}">Administradores</a>
+							<a class="dropdown-item tBackOfc"
+								th:href="@{tableBack/(username=${username})}">Back-office</a> <a
+								class="dropdown-item tAudi"
+								th:href="@{tableAudi/(username=${username})}">Consultores</a> <a
+								class="dropdown-item tCust"
+								th:href="@{tableCust/(username=${username})}">Clientes</a>
+						</div></li>
+
+					<!-- Cuestionarios -->
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="pagesDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> <i class="fab fa-wpforms"></i> <span>Cuestionario</span>
+					</a>
+						<div class="dropdown-menu" aria-labelledby="pagesDropdown">
+							<a class="dropdown-item tTypeQ"
+								th:href="@{tableTypeQuestionnaire/(username=${username})}">Tipos consultorias</a>
+							<a class="dropdown-item tSect"
+								th:href="@{tableSection/(username=${username})}">Secciones</a> <a
+								class="dropdown-item tQuest"
+								th:href="@{tableQuest/(username=${username})}">Preguntas</a>
+						</div></li>
+
+				</ul>
+			</div>
+		</nav>
+		<main layout:fragment="contenido" role="main"
+			class="col-md-9 ml-sm-auto col-lg-10 px-md-4 pt-4"></main>
+	</div>
+</div>
+
+
+

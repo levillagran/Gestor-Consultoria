@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" layout:decorate="master_admin">
+<body>
+	<main layout:fragment="contenido">
+	<div class="card">
+		<h4
+			class="card-header text-center font-weight-bold text-uppercase py-4">Lista consultores</h4>
+		<div class="card-body">
+			<div id="table" class="table-editable">
+				<span class="table-add float-right mb-3 mr-2"><a href="#!"
+					class="text-success"><i class="fas fa-plus fa-2x"
+						aria-hidden="true"></i></a></span>
+				<table
+					class="table table-bordered table-responsive-sm table-striped table-sm text-center">
+					<thead>
+						<tr>
+							<th class="text-center">Rol</th>
+							<th class="text-center">IMEI</th>
+							<th class="text-center">Nombre</th>
+							<th class="text-center">Apellido</th>
+							<th class="text-center">Usuario</th>
+							<th class="text-center">Clave</th>
+							<th class="text-center">E-mail</th>
+							<th class="text-center">Direccion</th>
+							<th class="text-center">Telefono</th>
+							<th class="text-center">Eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="consultor : ${consultores}">
+							<td class="pt-3-half" contenteditable="true"
+								th:text="${consultor.userId.roleId.rol}"></td>
+								<td class="pt-3-half" contenteditable="true"
+								th:text="${consultor.imei}"></td>
+							<td class="pt-3-half" contenteditable="true"
+								th:text="${consultor.userId.nombre}"></td>
+							<td class="pt-3-half" contenteditable="true"
+								th:text="${consultor.userId.apellido}"></td>
+							<td class="pt-3-half" contenteditable="true"
+								th:text="${consultor.userId.usuario}"></td>
+							<td class="pt-3-half" contenteditable="true">****</td>
+							<td class="pt-3-half" contenteditable="true"
+								th:text="${consultor.userId.mail}"></td>
+							<td class="pt-3-half" contenteditable="true"
+								th:text="${consultor.userId.direccion}"></td>
+							<td class="pt-3-half" contenteditable="true"
+								th:text="${consultor.userId.telefono}"></td>
+							<td><span class="table-remove"><button type="button"
+										class="btn btn-danger btn-rounded btn-sm my-0">Eliminar</button></span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	</main>
+</body>
+</html>

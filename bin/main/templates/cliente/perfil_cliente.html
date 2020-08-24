@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es" layout:decorate="master_cliente">
+<body>
+	<main layout:fragment="contenido">
+	<div class="row mb-2">
+		<div
+			class="row no-gutters border rounded overflow-hidden flex-md-row mb-4 shadow-sm position-relative">
+			<div class="col p-4 d-flex flex-column position-static">
+				<strong class="d-inline-block mb-2 text-primary"
+					th:text="${usuarioCli.nombreEmpresa}"></strong>
+				<h3 class="mb-0"
+					th:text="|${usuarioCli.userId.nombre}  ${usuarioCli.userId.apellido}|"></h3>
+				<div class="mb-1 text-muted"
+					th:text="${usuarioCli.userId.direccion}"></div>
+				<p class="card-text mb-auto" th:text="${usuarioCli.userId.telefono}"></p>
+				<a href="#" class="stretched-link"
+					th:text="${usuarioCli.userId.mail}"></a>
+			</div>
+			<div class="col p-4 d-flex flex-column">
+				<img src="/img/H2.jpg" alt="" class="img-responsive img-thumbnail" />
+			</div>
+		</div>
+	</div>
+	</main>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" layout:decorate="master_admin">
+<body>
+	<main layout:fragment="contenido">
+	<div class="card">
+		<h4
+			class="card-header text-center font-weight-bold text-uppercase py-4">Lista de preguntas</h4>
+		<div class="card-body">
+			<div id="table" class="table-editable">
+				<span class="table-add float-right mb-3 mr-2"><a href="#!"
+					class="text-success"><i class="fas fa-plus fa-2x"
+						aria-hidden="true"></i></a></span>
+				<select
+					class="browser-default custom-select mb-3 mr-2"
+					id="tipoConsultoria" required="required">
+					<option value="0" disabled selected>Seleccione el tipo de
+						consultoria</option>
+					<option th:each="tipoConsultoria : ${tipoConsultorias}"
+						th:value="${tipoConsultoria.tipoConsultoriaId}"
+						th:text="${tipoConsultoria.tipoConsultoria}"/>
+				</select>
+				<select
+					class="browser-default custom-select mb-3 mr-2"
+					id="tipoConsultoria" required="required">
+					<option value="0" disabled selected>Seleccione la seccion</option>
+					<option th:each="seccion : ${secciones}"
+						th:value="${seccion.seccionId}"
+						th:text="${seccion.seccion}"/>
+				</select>
+				<table
+					class="table table-bordered table-responsive-sm table-striped table-sm text-center">
+					<thead>
+						<tr>
+							<th class="text-center">Numero pregunta</th>
+							<th class="text-center">Pregunta</th>
+							<th class="text-center">Eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="pregunta : ${preguntas}">
+							<td class="pt-3-half" contenteditable="true"
+								th:text="${pregunta.preguntasId}"></td>
+							<td class="pt-3-half" contenteditable="true"
+								th:text="${pregunta.preguntas}"></td>
+							<td><span class="table-remove"><button type="button"
+										class="btn btn-danger btn-rounded btn-sm my-0">Eliminar</button></span>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	</main>
+</body>
+</html>

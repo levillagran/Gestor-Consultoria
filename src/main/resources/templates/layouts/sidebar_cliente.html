@@ -1,0 +1,33 @@
+
+<div th:fragment="sidebar-cliente" class="container-fluid">
+	<div class="row">
+		<nav id="sidebarMenu"
+			class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+			<div class="sidebar-sticky pt-3">
+				<ul class="nav flex-column">
+					<li class="nav-item"><a class="nav-link active" href="#"><i
+							class="fas fa-tachometer-alt"></i> Dashboard <span
+							class="sr-only">(current)</span> </a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/cliente/perfil_cliente/(clienteId=${usuarioCli.clienteId})}">
+							<i class="fas fa-user"></i> Perfil
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/cliente/solicitud_consultoria/(clienteId=${usuarioCli.clienteId})}">
+							<i class="fas fa-calendar-plus"></i> Solicitar nueva consultoria
+					</a></li>
+					<li class="nav-item"><a class="nav-link"
+						th:href="@{/cliente/consulta_consultorias/(clienteId=${usuarioCli.clienteId})}">
+							<i class="fas fa-layer-group"></i> Consultorias
+					</a></li>
+				</ul>
+
+			</div>
+		</nav>
+		<main layout:fragment="contenido" role="main"
+			class="col-md-9 ml-sm-auto col-lg-10 px-md-4 pt-4"></main>
+	</div>
+</div>
+
+
+

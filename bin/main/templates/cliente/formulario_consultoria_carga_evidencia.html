@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es" layout:decorate="master_cliente">
+<body>
+	<main layout:fragment="contenido"> <th:block
+		th:each="seccionPreguntasPorcentaje,itere : ${seccionesPreguntasPorcentaje}">
+		<div class="card-header text-center">
+			<label class="blockquote mb-3 font-italic"
+				th:attr="for='bar'+${seccionPreguntasPorcentaje.progresoConsultoria}">Porcentaje
+				de avance de la consultoria</label>
+			<div class="progress">
+				<div class="progress-bar bg-success" role="progressbar"
+					aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+					th:attr="aria-valuenow=${seccionPreguntasPorcentaje.progresoConsultoria}, style='width: '+${seccionPreguntasPorcentaje.progresoConsultoria}+'%', id='bar'+${seccionPreguntasPorcentaje.progresoConsultoria}"
+					th:text="${seccionPreguntasPorcentaje.progresoConsultoria}+'%'"></div>
+			</div>
+			<h4 class="font-weight-bold text-uppercase py-4">Formulario de
+				carga de evidencia</h4>
+		</div>
+		<div class="accordion" id="accordionExample">
+			<th:block
+				th:each="seccionPreguntas,itere : ${seccionPreguntasPorcentaje.sp}">
+
+				<div class="card">
+					<div class="card-header"
+						th:attr="id='headingOne'+${seccionPreguntas.seccion.seccionId}">
+						<label
+							th:attr="for='bar'+${seccionPreguntas.seccion.progresoSeccion}"><h2
+								class="mb-0">
+								<button class="btn btn-link btn-block text-left" type="button"
+									data-toggle="collapse"
+									th:attr="data-target='#colapse'+${seccionPreguntas.seccion.seccionId}"
+									aria-expanded="true"
+									th:text="${seccionPreguntas.seccion.seccion}"></button>
+							</h2></label>
+						<div class="progress">
+							<div class="progress-bar bg-danger" role="progressbar"
+								aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"
+								th:attr="aria-valuenow=${seccionPreguntas.seccion.progresoSeccion}, style='width: '+${seccionPreguntas.seccion.progresoSeccion}+'%', id='bar'+${seccionPreguntas.seccion.progresoSeccion}"
+								th:text="${seccionPreguntas.seccion.progresoSeccion}+'%'"></div>
+						</div>
+					</div>
+					<div
+						th:attr="id='colapse'+${seccionPreguntas.seccion.seccionId}, aria-labelledby='headingOne'+${seccionPreguntas.seccion.seccionId}, data-parent='#accordionExample'"
+						class="collapse">
+						<div class="card-body">
+							<h3>HITOS</h3>
+							<!-- Preguntas -->
+							<th:block
+								th:each="pregunta, iter : ${seccionPreguntas.lpreguntas}">
+								<hr class="mb-4 bg-primary">
+								<div class="mb-3">
+									<div
+										th:classappend="'alert-' + (${clase != null} ? ${clase} : info)"
+										th:if="${mensaje != null}" th:text="${mensaje}" class="alert">
+									</div>
+									<form enctype="multipart/form-data"
+										th:action="@{/cliente/subirEvidencia(consultorId=${usuarioCli.clienteId}, informeId=${consultoria.informeId}, preguntaId=${pregunta.preguntaId}, sp=${seccionPreguntas})}"
+										method="Post">
+										<div class="form-group">
+											<h6 class="blockquote mb-3 font-italic"
+												th:text="${iter.index+1} + '.-  '+${pregunta.pregunta}"></h6>
+											<div class="mb-3">
+												<label class="font-weight-bold"
+													th:attr="for='extAreaA'+${pregunta.preguntaId}">Actividad
+													/ Asesoria</label>
+												<textarea class="form-control border border-primary"
+													th:attr="id='extAreaA'+${pregunta.preguntaId}" rows="2"
+													name="actividad" th:text="${pregunta.actividad}"></textarea>
+											</div>
+											<div class="mb-3">
+												<label class="font-weight-bold"
+													th:attr="for='extAreaB'+${pregunta.preguntaId}">Entregables</label>
+												<textarea class="form-control border border-primary"
+													th:attr="id='extAreaB'+${pregunta.preguntaId}" rows="2"
+													name="entregable" th:text="${pregunta.entregable}"></textarea>
+											</div>
+											<div class="mb-3">
+												<label class="font-weight-bold"
+													th:attr="for='archivo'+${pregunta.preguntaId}">Seleccione
+													un archivo como evidencia</label>
+												<div class="custom-file">
+													<input type="file" class="custom-file-input"
+														th:attr="id='archivo'+${pregunta.preguntaId}" name="file">
+													<label class="custom-file-label"
+														th:attr="for='archivo'+${pregunta.preguntaId}">Seleccione
+														archivo</label>
+												</div>
+											</div>
+											<!-- si o no-->
+											<div class="conteiner text-center mb-2">
+												<label class="font-weight-bold">Cumple / no cumple</label>
+											</div>
+											<div class="conteiner text-center mb-3">
+												<div
+													class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input"
+														th:attr="id='A'+${pregunta.preguntaId}" name="respuesta">
+													<label class="custom-control-label"
+														th:attr="for='A'+${pregunta.preguntaId}">SI</label>
+												</div>
+												<div
+													class="custom-control custom-radio custom-control-inline">
+													<input type="radio" class="custom-control-input"
+														th:attr="id='B'+${pregunta.preguntaId}" name="respuesta">
+													<label class="custom-control-label"
+														th:attr="for='B'+${pregunta.preguntaId}">NO</label>
+												</div>
+											</div>
+										</div>
+										<div class="row justify-content-center">
+											<div class="col-auto">
+												<button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+											</div>
+										</div>
+									</form>
+								</div>
+							</th:block>
+						</div>
+					</div>
+				</div>
+			</th:block>
+		</div>
+	</th:block>
+	<h4 class="card-header text-center font-weight-bold text-danger py-5">
+		________ <a
+			th:href="@{/consultor/enviar_consultoria(clienteId=${usuarioCli.clienteId}, informeId=${consultoria.informeId})}"
+			class="btn btn-info" title="Subir evidencia">Enviar a cliente</a>
+		________
+	</h4>
+	</main>
+</body>
+</html>

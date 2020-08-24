@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es" layout:decorate="master_cliente">
+<body>
+	<main layout:fragment="contenido"> <!-- Editable table -->
+	<div class="col-md-8 order-md-1">
+		<h4 class="mb-3">Solicitud de consultoria</h4>
+		<div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje != null}"
+             th:text="${mensaje}"
+             class="alert">
+        </div>
+        <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje1 != null}"
+             th:text="${mensaje1}"
+             class="alert">
+        </div>
+        <div th:classappend="'alert-' + (${clase != null} ? ${clase} : info)" th:if="${mensaje2 != null}"
+             th:text="${mensaje2}"
+             class="alert">
+        </div>
+		<form th:action="@{/cliente/saveSolicitudConsultoria/(clienteId=${usuarioCli.clienteId})}" method="post">
+			<div class="form-group mb-3">
+				<label for="nombreEmpresa">Nombre empresa: </label> <br /> <strong
+					class="d-inline-block mb-2 text-primary"
+					th:text="${usuarioCli.nombreEmpresa}" id="nombreEmpresa"></strong>
+			</div>
+			<div class="form-group mb-3">
+				<label for="tipoConsul">Tipo de consultoria: </label> 
+				<select class="custom-select d-block w-100" id="tipoConsul" name="tipoConsultoriaId" required>
+					<option th:each="tipoConsultoria : ${tipoConsultorias}" th:value="${tipoConsultoria.tipoConsultoriaId}"
+						th:text="${tipoConsultoria.tipoConsultoria}"></option>
+				</select>
+				<div class="invalid-feedback">Seleccione un tipo de consultoria</div>
+			</div>
+			<div class="form-group form-row mb-3">
+						<div class="col-md">
+							<label for="fechaInicio">Fecha estimada de inicio:</label> <input
+								class="form-control" type="date" id="fechaInicio"
+								name="fechaInicio">
+						</div>
+						<div class="col-md">
+							<label for="fechaFin">Fecha estimada de fin:</label> <input
+								class="form-control" type="date" id="fechaFin"
+								name="fechaFin">
+						</div>
+					</div>
+			<hr class="mb-4">
+			<button class="btn btn-primary btn-sm btn-block" type="submit">Solicitar
+				Consultoria</button>
+		</form>
+	</div>
+	</main>
+</body>
+</html>

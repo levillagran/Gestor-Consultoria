@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es" layout:decorate="master_back_office">
+<body>
+	<main layout:fragment="contenido">
+	<div class="accordion" id="accordionExample">
+		<div class="card">
+			<h4
+				class="card-header text-center font-weight-bold text-uppercase py-4">Asignar
+				consultor a nueva consultoria</h4>
+			<div class="card-body">
+				<form th:action="@{/backoffice/asignarConsultoria/(backOfficeId=${usuarioBack.backOfficeId}, informeId=${consultoria.informeId})}" method="POST">
+					<div class="form-group mb-2">
+						<label>Consultoria:</label> <label
+							th:text="${consultoria.informeId}"></label>
+					</div>
+					<div class="form-group mb-3">
+						<label for="tipoConsul">Consultores: </label> <select
+							class="custom-select d-block w-100" id="tipoConsul"
+							name="consultorId" required>
+							<option th:each="consultor : ${consultores}"
+								th:value="${consultor.consultorId}"
+								th:text="${consultor.userId.nombre}"></option>
+						</select>
+						<div class="invalid-feedback">Seleccione consultor</div>
+					</div>
+					<div class="form-row mb-3">
+						<div class="col-md mb-3">
+							<label>Fecha inicio propuesta:</label> <label
+								class="p-1 bg-danger text-white"
+								th:text="${consultoria.datoComunId.solicitudConsultoriaId.fechaInicio}"></label>
+							<br> <label for="fechaInicio">Fecha inicio:</label> <input
+								class="form-control" type="date" id="fechaInicio"
+								name="fechaInicio">
+						</div>
+						<div class="col-md mb-3">
+							<label>Fecha final propuesta:</label> <label
+								class="p-1 bg-danger text-white"
+								th:text="${consultoria.datoComunId.solicitudConsultoriaId.fechaFinal}"></label>
+							<br> <label for="fechaFin">Fecha final:</label> <input
+								class="form-control" type="date" id="fechaFin"
+								name="fechaFin">
+						</div>
+					</div>
+					<hr class="mb-4">
+					<button class="btn btn-primary btn-sm btn-block" type="submit">Asignar</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	</main>
+</body>
+</html>
